@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'krittapas-backend-ftgwh9frezgeeghu.eastasia-01.azurewebsites.net',
+  baseURL: 'https://krittapas-backend-ftgwh9frezgeeghu.eastasia-01.azurewebsites.net/',
   // baseURL: 'http://127.0.0.1:8000/api', // Local API
   headers: {
     'Content-Type': 'application/json',
