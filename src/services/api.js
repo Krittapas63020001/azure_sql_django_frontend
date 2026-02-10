@@ -8,6 +8,10 @@ const api = axios.create({
   },
 });
 
+console.log('🔧 API Configuration:');
+console.log('  Main API URL:', api.defaults.baseURL);
+console.log('  VITE_API_URL:', import.meta.env.VITE_API_URL);
+
 // Add a response interceptor to handle errors globally if needed
 api.interceptors.response.use(
   (response) => response,
@@ -57,14 +61,24 @@ export const reviewService = {
 };
 
 const functionApi = axios.create({
-  baseURL: import.meta.env.VITE_FUNCTION_API_URL || 'https://<YOUR_FUNCTION_APP_NAME>.azurewebsites.net/api',
+  baseURL: import.meta.env.VITE_FUNCTION_API_URL, // No fallback - must be set in .env
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
+console.log('🔧 Function API Configuration:');
+console.log('  Function API URL:', functionApi.defaults.baseURL);
+console.log('  VITE_FUNCTION_API_URL:', import.meta.env.VITE_FUNCTION_API_URL);
+
 export const contentFilterService = {
-  filterComment: (comment) => functionApi.post('/filter_comment', { comment }).then(res => res.data),
+  filterComment: (comment) => {
+    if (!functionApi.defaults.baseURL) {
+      console.error('❌ VITE_FUNCTION_API_URL is not set! Please add it to your .env file.');
+      return Promise.reject(new Error('Function API URL not configured'));
+    }
+    return functionApi.post('/filter_comment', { comment }).then(res => res.data);
+  },
 };
 
 export default api;
