@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'krittapas-backend-ftgwh9frezgeeghu.eastasia-01.azurewebsites.net/api',
+  baseURL: import.meta.env.VITE_API_URL || 'https://krittapas-backend-ftgwh9frezgeeghu.eastasia-01.azurewebsites.net/api',
   // baseURL: 'http://127.0.0.1:8000/api', 
   headers: {
     'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ export const reviewService = {
 };
 
 // Function App URL - Replace with your actual Azure Function App URL
-const FUNCTION_API_URL = 'krittapas-filter-f5dsdkehdqh5e6ed.eastasia-01.azurewebsites.net/api';
+const FUNCTION_API_URL = 'https://krittapas-filter-f5dsdkehdqh5e6ed.eastasia-01.azurewebsites.net/api';
 
 const functionApi = axios.create({
   baseURL: FUNCTION_API_URL,
